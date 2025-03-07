@@ -1,0 +1,97 @@
+[
+  {
+    "startTime": 0,
+    "endTime": 10,
+    "value": "Rise & Fry! 🍳",
+    "mealList": [
+      {
+        "name": "Breakfast",
+        "value": "breakfast"
+      },
+      {
+        "name": "Sauce",
+        "value": "sauce"
+      },
+      {
+        "name": "Bread",
+        "value": "bread"
+      }
+    ]
+  },
+  {
+    "startTime": 11,
+    "endTime": 14,
+    "value": "Midday Munch! 🌭",
+    "mealList": [
+      {
+        "name": "Main course",
+        "value": "maincourse"
+      },
+      {
+        "name": "Salad",
+        "value": "salad"
+      },
+      {
+        "name": "Side dish",
+        "value": "sidedish"
+      }
+    ]
+  },
+  {
+    "startTime": 15,
+    "endTime": 17,
+    "value": "Sneaking Snacking! 🍕",
+    "mealList": [
+      {
+        "name": "Snack",
+        "value": "snack"
+      },
+      {
+        "name": "Side dish",
+        "value": "sidedish"
+      },
+      {
+        "name": "Finger food",
+        "value": "fingerfood"
+      }
+    ]
+  },
+  {
+    "startTime": 18,
+    "endTime": 21,
+    "value": "Dinnertime Magic! 🍝",
+    "mealList": [
+      {
+        "name": "Main course",
+        "value": "maincourse"
+      },
+      {
+        "name": "Soup",
+        "value": "soup"
+      },
+      {
+        "name": "Side dish",
+        "value": "sidedish"
+      }
+    ]
+  },
+  {
+    "startTime": 22,
+    "endTime": 24,
+    "value": "Midnight Bites! 🍿",
+    "mealList": [
+      {
+        "name": "Snack",
+        "value": "snack"
+      },
+      {
+        "name": "Beverage",
+        "value": "beverage"
+      },
+      {
+        "name": "Bread",
+        "value": "bread"
+      }
+    ]
+  }
+]

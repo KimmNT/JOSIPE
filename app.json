@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "josipe",
+    "name": "JOSIPE",
     "slug": "josipe",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.josekim.josipe"
     },
     "web": {
       "bundler": "metro",
@@ -29,13 +30,21 @@
         {
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "resizeMode": "contain"
         }
       ]
     ],
     "experiments": {
-      "typedRoutes": true
-    }
+      "typedRoutes": false
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "2a0fd724-d0b0-4fc3-ad0c-fd9dc68a1e12"
+      }
+    },
+    "owner": "josekim"
   }
 }

@@ -1,0 +1,27 @@
+[
+  {
+    "id": "001",
+    "name": "Perfect for",
+    "value": "dishType"
+  },
+  {
+    "id": "005",
+    "name": "Diet list",
+    "value": "diets"
+  },
+  {
+    "id": "004",
+    "name": "Nutrition",
+    "value": "nutrition"
+  },
+  {
+    "id": "003",
+    "name": "Other ingredients",
+    "value": "extendedIngredients"
+  },
+  {
+    "id": "002",
+    "name": "Instruction",
+    "value": "instruction"
+  }
+]
