@@ -147,7 +147,16 @@ export default function index() {
               <View style={[styles.homeItemList]}>
                 {mealTypeList.map((meal, index) => (
                   <TouchableOpacity
-                    onPress={() => router.push("/refree")}
+                    onPress={() =>
+                      router.push({
+                        pathname: "/mealList",
+                        params: {
+                          url: `/recipes/complexSearch?number=10&type=${meal.value}`,
+                          type: meal.name,
+                          endPoin: "results",
+                        },
+                      })
+                    }
                     key={index}
                     style={[styles.item, styles.itemGrow]}
                   >

@@ -1,61 +1,48 @@
-import React from "react";
-import { Text, StyleSheet, View } from "react-native";
-import Animated, {
-  useAnimatedScrollHandler,
-  useSharedValue,
-  interpolateColor,
-  useAnimatedStyle,
-} from "react-native-reanimated";
+import { Image, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import SliderComponent from "@/components/slider";
+import exploreData from "@/json/explore.json";
+import DualSliderComponent from "@/components/dualSlider";
 
-const ScrollBackgroundChange: React.FC = () => {
-  const scrollY = useSharedValue(0); // Track scroll position
+const Splash = require("../../assets/images/splash.png");
 
-  const scrollHandler = useAnimatedScrollHandler((event) => {
-    scrollY.value = event.contentOffset.y; // Update scroll position
-  });
-
-  // Animated background color change
-  const animatedStyle = useAnimatedStyle(() => ({
-    backgroundColor: interpolateColor(
-      scrollY.value,
-      [0, 300], // Scroll range
-      ["white", "maroon"] // Color transition
-    ),
-  }));
-
-  // Animated text color change
-  const textStyle = useAnimatedStyle(() => ({
-    color: interpolateColor(scrollY.value, [0, 300], ["black", "white"]),
-  }));
+export default function index() {
+  const [rangeTimeSelected, setRangeTimeSelected] = useState(0);
+  const [minCarbsSelected, setMinCarbsSelected] = useState(0);
+  const [maxCarbsSelected, setMaxCarbsSelected] = useState(0);
 
   return (
-    <Animated.View style={[styles.container, animatedStyle]}>
-      <Animated.ScrollView
-        onScroll={scrollHandler}
-        scrollEventThrottle={16}
-        contentContainerStyle={styles.scrollContent}
-      >
-        <Animated.Text style={[styles.text, textStyle]}>
-          <Text>Scroll Up to Change Background!</Text>
-        </Animated.Text>
-        <View style={{ height: 800 }} /> {/* Dummy content for scrolling */}
-      </Animated.ScrollView>
-    </Animated.View>
+    <View style={{ width: "100%", height: "100%" }}>
+      <Image
+        source={Splash}
+        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+      />
+      {/* <SliderComponent
+        sliderName="Range time"
+        sliderMaxInitValue={exploreData.readyTime.maxValue / 2}
+        sliderMaxValue={exploreData.readyTime.maxValue}
+        sliderMinInitValue={exploreData.readyTime.minValue}
+        sliderMinValue={exploreData.readyTime.minValue}
+        sliderStep={1}
+        onValueChange={setRangeTimeSelected}
+      />
+      <Text>{rangeTimeSelected}</Text>
+      <DualSliderComponent
+        sliderName="Range time"
+        sliderMaxInitValue={exploreData.carb.maxValue / 2}
+        sliderMaxValue={exploreData.carb.maxValue}
+        sliderMinInitValue={exploreData.carb.minValue}
+        sliderMinValue={exploreData.carb.minValue}
+        sliderSafeRange={10}
+        sliderStep={10}
+        onMaxValueChange={setMaxCarbsSelected}
+        onMinValueChange={setMinCarbsSelected}
+      />
+      <Text>
+        {minCarbsSelected} - {maxCarbsSelected}
+      </Text> */}
+    </View>
   );
-};
+}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  scrollContent: {
-    alignItems: "center",
-    paddingVertical: 50,
-  },
-  text: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-});
-
-export default ScrollBackgroundChange;
+const styles = StyleSheet.create({});

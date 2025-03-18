@@ -9,19 +9,15 @@ import {
 import ingredientData from "../../json/ingredients.json";
 import Icon from "@expo/vector-icons/MaterialIcons";
 import { useIngredient } from "@/context/ingredientContext"; // Import useIngredient hook
-import { Dish } from "@/interfaces";
 import refreeStyle from "../../styles/refreeStyle";
-import CustomModal from "@/model/Modal";
-import { fetchData } from "@/services/api.services";
+import TopNav from "@/components/topNav";
+import { router } from "expo-router";
+const emoji = require("node-emoji");
 
 export default function Index() {
-  const [dishes, setDishes] = useState<Dish[]>([]);
   const [ingreName, setIngreName] = useState("");
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
   const { ingredients, addIngredient, removeIngredient } = useIngredient();
-  const [modalVisible, setModalVisible] = useState(false);
-
-  // const { data: dishes, loading, error } = useFetch<Dish[]>(query);
 
   // Handle typing
   const handleInputChange = (text: string) => {
@@ -44,47 +40,63 @@ export default function Index() {
   };
 
   const handleGenerateDishes = async () => {
+    // setLoading(true)
     try {
       const queryArray = ingredients
         .map((item) => item.name.toLowerCase())
         .join(",");
-      const response = await fetchData(
-        `/recipes/findByIngredients?ingredients=${queryArray}&number=6`
-      );
-      setDishes(response);
+      // const response = await fetchData(
+      //   `/recipes/findByIngredients?ingredients=${queryArray}&number=6`
+      // );
+      // setDishes(response);
+      router.push({
+        pathname: "/mealList",
+        params: {
+          url: `/recipes/findByIngredients?ingredients=${queryArray}&number=10`,
+          type: "Meals Suggestion",
+          endPoin: "",
+        },
+      });
     } catch (err) {
       console.error(err);
     } finally {
       console.log("finally");
     }
-    setModalVisible(true);
   };
 
   return (
-    <View style={refreeStyle.homePageContainer}>
+    <View style={refreeStyle.refreePageContainer}>
+      <TopNav />
       {/* Input Field */}
-      <View style={refreeStyle.homepageInputContainer}>
-        <TextInput
-          style={refreeStyle.homepageInput}
-          value={ingreName}
-          onChangeText={handleInputChange}
-          placeholder="Enter ingredient"
-          placeholderTextColor="#2A3335"
-        />
+      <View style={refreeStyle.refreeHeader}>
+        <View style={refreeStyle.refreeHeadlineContainer}>
+          <Text style={refreeStyle.refreeHeadlineValue}>
+            Fill in your ingredients
+          </Text>
+        </View>
+        <View style={refreeStyle.refreepageInputContainer}>
+          <TextInput
+            style={refreeStyle.refreepageInput}
+            value={ingreName}
+            onChangeText={handleInputChange}
+            placeholder="Enter ingredient"
+            placeholderTextColor="#2A3335"
+          />
+        </View>
       </View>
 
       {filteredSuggestions.length > 0 && (
-        <View style={refreeStyle.homepageSuggestion}>
+        <View style={refreeStyle.refreepageSuggestion}>
           <FlatList
             data={filteredSuggestions}
             keyExtractor={(item, index) => index.toString()}
-            style={refreeStyle.homepageSuggestionList}
+            style={refreeStyle.refreepageSuggestionList}
             renderItem={({ item }) => (
               <TouchableOpacity
-                style={refreeStyle.homepageSuggestionItem}
+                style={refreeStyle.refreepageSuggestionItem}
                 onPress={() => handleAddIngredient(item)}
               >
-                <Text style={refreeStyle.homepageSuggestionItemText}>
+                <Text style={refreeStyle.refreepageSuggestionItemText}>
                   {item}
                 </Text>
               </TouchableOpacity>
@@ -93,16 +105,17 @@ export default function Index() {
         </View>
       )}
 
-      <View style={refreeStyle.homepageIngreContainer}>
-        <View style={refreeStyle.homepageIngreList}>
+      <View style={refreeStyle.refreepageIngreContainer}>
+        <View style={refreeStyle.refreepageIngreList}>
           {ingredients.map((ingredient) => (
-            <View key={ingredient.id} style={refreeStyle.homepageIngreItem}>
-              <Text style={refreeStyle.homepageIngreItemTitle}>
+            <View key={ingredient.name} style={refreeStyle.refreepageIngreItem}>
+              <Text>{emoji.get(`${ingredient.name.toLowerCase()}`)}</Text>
+              <Text style={refreeStyle.refreepageIngreItemTitle}>
                 {ingredient.name}
               </Text>
               <TouchableOpacity
                 onPress={() => removeIngredient(ingredient.id)}
-                style={refreeStyle.homepageIngreItemButton}
+                style={refreeStyle.refreepageIngreItemButton}
               >
                 <Icon name="close" color="white" size={17} />
               </TouchableOpacity>
@@ -112,31 +125,17 @@ export default function Index() {
             <TouchableOpacity
               onPress={handleGenerateDishes}
               style={[
-                refreeStyle.homepageIngreItem,
-                refreeStyle.homepageCreateDishBtn,
+                refreeStyle.refreepageIngreItem,
+                refreeStyle.refreepageCreateDishBtn,
               ]}
             >
-              {/* {loading ? (
-                <ActivityIndicator color="#FFF" />
-              ) : (
-                <Text style={refreeStyle.homepageCreateDishBtnText}>
-                  Cook it!
-                </Text>
-              )} */}
-              <Text style={refreeStyle.homepageCreateDishBtnText}>
+              <Text style={refreeStyle.refreepageCreateDishBtnText}>
                 Cook it!
               </Text>
             </TouchableOpacity>
           )}
         </View>
       </View>
-      <CustomModal
-        visible={modalVisible}
-        onClose={() => setModalVisible(false)}
-        title="Hello!"
-        content="This is a custom modal with TypeScript."
-        data={dishes}
-      />
     </View>
   );
 }

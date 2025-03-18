@@ -12,7 +12,7 @@ const saved = "#fac703";
 const res = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
-  homePageContainer: {
+  refreePageContainer: {
     backgroundColor: background,
     // paddingVertical: Platform.OS === "ios" ? res * 0.015 : "",
     paddingHorizontal: res * 0.01,
@@ -23,13 +23,16 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     gap: res * 0.01,
   },
-  homePageHeadline: {
-    color: dark,
-    fontWeight: "600",
-    fontSize: res * 0.06,
-    marginVertical: res * 0.04,
+  refreeHeader: {
+    marginTop: res * 0.02,
+    gap: res * 0.04,
+    alignItems: "flex-end",
   },
-  homepageInputContainer: {
+  refreeHeadlineContainer: {},
+  refreeHeadlineValue: {
+    fontSize: res * 0.03,
+  },
+  refreepageInputContainer: {
     display: "flex",
     flexDirection: "row",
     gap: res * 0.01,
@@ -42,50 +45,50 @@ const styles = StyleSheet.create({
     borderColor: dark,
     borderStyle: "solid",
   },
-  homepageInput: {
+  refreepageInput: {
     padding: res * 0.005,
     width: "100%",
   },
-  homepageSuggestion: {
+  refreepageSuggestion: {
     width: "100%",
     position: "relative",
     zIndex: 10,
   },
-  homepageSuggestionList: {
+  refreepageSuggestionList: {
     position: "absolute",
     top: -5,
     left: 0,
     backgroundColor: light,
     width: "100%",
     padding: res * 0.01,
-    borderRadius: res * 0.01,
+    borderRadius: res * 0.03,
     borderWidth: res * 0.001,
     borderColor: dark,
     borderStyle: "solid",
   },
-  homepageSuggestionItem: {
+  refreepageSuggestionItem: {
     padding: res * 0.01,
     backgroundColor: background,
-    borderRadius: res * 0.01,
+    borderRadius: res * 0.05,
     marginTop: res * 0.01,
   },
-  homepageSuggestionItemText: {
+  refreepageSuggestionItemText: {
     color: dark,
     fontWeight: "600",
   },
-  homepageIngreContainer: {
+  refreepageIngreContainer: {
     display: "flex",
     flexDirection: "column",
     gap: res * 0.01,
   },
-  homepageIngreList: {
+  refreepageIngreList: {
     display: "flex",
     flexDirection: "row",
     gap: res * 0.01,
     marginTop: res * 0.01,
     flexWrap: "wrap",
   },
-  homepageIngreItem: {
+  refreepageIngreItem: {
     display: "flex",
     flexDirection: "row",
     gap: res * 0.02,
@@ -99,12 +102,12 @@ const styles = StyleSheet.create({
     borderColor: dark,
     borderStyle: "solid",
   },
-  homepageIngreItemTitle: {
+  refreepageIngreItemTitle: {
     fontSize: res * 0.02,
     color: secondary,
     fontWeight: "bold",
   },
-  homepageIngreItemButton: {
+  refreepageIngreItemButton: {
     backgroundColor: dangerous,
     borderRadius: (res * 0.03) / 2,
     width: res * 0.03,
@@ -113,14 +116,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  homepageCreateDishBtn: {
+  refreepageCreateDishBtn: {
     backgroundColor: primary,
     paddingHorizontal: res * 0.05,
     borderWidth: res * 0.001,
     borderColor: primary,
     borderStyle: "solid",
   },
-  homepageCreateDishBtnText: {
+  refreepageCreateDishBtnText: {
     fontSize: res * 0.02,
     color: light,
   },

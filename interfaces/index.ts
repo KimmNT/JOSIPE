@@ -3,6 +3,27 @@ export interface Ingredient {
   name: string;
 }
 
+export interface DualSlider {
+  sliderName: string;
+  sliderMinInitValue: number;
+  sliderMaxInitValue: number;
+  sliderMinValue: number;
+  sliderMaxValue: number;
+  sliderStep: number;
+  sliderSafeRange: number;
+  onMinValueChange: (value: number) => void;
+  onMaxValueChange: (value: number) => void;
+}
+export interface SingleSlider {
+  sliderName: string;
+  sliderMinInitValue: number;
+  sliderMaxInitValue: number;
+  sliderMinValue: number;
+  sliderMaxValue: number;
+  sliderStep: number;
+  onValueChange: (value: number) => void;
+}
+
 export interface IngredientOnQuery {
   name: string;
 }

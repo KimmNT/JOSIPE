@@ -8,14 +8,28 @@ import Icon from "@expo/vector-icons/MaterialIcons";
 import RenderHTML from "react-native-render-html";
 import { useWindowDimensions } from "react-native";
 import { fetchData } from "@/services/api.services";
+import {
+  loadList,
+  addToList,
+  removeFromList,
+  clearAll,
+} from "../../utility/storage";
 
 export default function DishDetailInfo() {
   const [dishInfo, setDishInfo] = useState<DishDetail | null>(null);
+  const [localSaveItems, setLocalSaveItems] = useState<string[]>([]); // State to hold items
+  const [isSave, setIsSave] = useState(false);
 
   const { id } = useLocalSearchParams();
   const { width } = useWindowDimensions();
 
   useEffect(() => {
+    const fetchData = async () => {
+      const data = await loadList();
+      setIsSave(data.some((item) => item === id));
+      setLocalSaveItems(data);
+    };
+    fetchData();
     getDishByID();
   }, []);
 
@@ -34,8 +48,37 @@ export default function DishDetailInfo() {
     router.back();
   };
 
+  const handleAdd = async () => {
+    if (typeof id === "string") {
+      await addToList(id);
+      setIsSave(true);
+      setLocalSaveItems(await loadList());
+    } else {
+      console.error("handleAdd: Expected a string but got an array", id);
+    }
+  };
+
+  const handleRemove = async () => {
+    if (typeof id === "string") {
+      await removeFromList(id);
+      setIsSave(false);
+      setLocalSaveItems(await loadList());
+    } else {
+      console.error("handleRemove: Expected a string but got an array", id);
+    }
+  };
+
+  // ✅ Handle save/remove logic
+  const handleSaveItem = () => {
+    if (isSave) {
+      handleRemove();
+    } else {
+      handleAdd();
+    }
+  };
+
   return (
-    <View style={refreeStyle.homePageContainer}>
+    <View style={refreeStyle.refreePageContainer}>
       <View style={detailStyle.detailContainer}>
         <View style={detailStyle.detailHeader}>
           <View style={detailStyle.detailHeaderController}>
@@ -49,9 +92,15 @@ export default function DishDetailInfo() {
               />
             </TouchableOpacity>
             <View style={detailStyle.detailHeaderCustomize}>
-              <TouchableOpacity style={detailStyle.detailHeaderBtnFav}>
+              <TouchableOpacity
+                onPress={() => handleSaveItem()}
+                style={detailStyle.detailHeaderBtnFav}
+              >
                 <Icon
-                  style={detailStyle.detailHeaderBtnFavIcon}
+                  style={[
+                    detailStyle.detailHeaderBtnFavIcon,
+                    isSave ? detailStyle.detailHeaderBtnFavIconActive : "",
+                  ]}
                   name="favorite"
                 />
               </TouchableOpacity>

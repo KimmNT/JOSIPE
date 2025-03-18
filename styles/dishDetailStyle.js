@@ -7,7 +7,7 @@ const light = "#fff";
 const dangerous = "#A31D1D";
 const background = "#F1F0E9";
 const favorite = "#ee9da0";
-const saved = "#fac703";
+const saved = "#FE4F2D";
 // Get screen height dynamically
 const res = Dimensions.get("window").height;
 
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   detailHeaderController: {
     position: "absolute",
-    top: 20,
+    top: 10,
     left: 0,
     flexDirection: "row",
     alignItems: "flex-start",
@@ -64,6 +64,10 @@ const styles = StyleSheet.create({
   detailHeaderBtnFavIcon: {
     fontSize: res * 0.025,
     color: dark,
+  },
+  detailHeaderBtnFavIconActive: {
+    fontSize: res * 0.025,
+    color: saved,
   },
   detailHeaderBtnSave: {
     alignItems: "center",
